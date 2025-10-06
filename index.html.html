@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Smile Dental Clinic Patient History Form - استبيان التاريخ الطبي</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Kufi+Arabic:wght+400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styling for a professional medical look */
+        :root {
+            /* Gold/White Theme */
+            --primary-color: #C19D41; /* Deep Gold/Bronze */
+            --secondary-color: #5D4D2E; /* Dark Brown/Gold Text */
+            --light-bg: #FFF8E1; /* Very Light Cream/White */
+            --whatsapp-color: #25D366; /* Retaining green for the WhatsApp button */
+        }
+        body {
+            /* Use Inter for English and Noto Kufi Arabic for Arabic */
+            font-family: 'Inter', 'Noto Kufi Arabic', sans-serif;
+            background-color: var(--light-bg); 
+        }
+        .form-container {
+            max-width: 768px;
+            /* ----------------------------------------------------------- */
+            /* 1. BACKGROUND IMAGE STYLING */
+            /* IMPORTANT: Replace the URL below with your actual logo URL */
+            background-image: url(https://i.imgur.com/M0xA1Y8.png); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            position: relative; /* Needed for the overlay */
+            overflow: hidden; /* Prevent background from extending beyond bounds */
+            /* ----------------------------------------------------------- */
+        }
+        /* Inner container to hold content and apply a subtle white overlay over the background image */
+        .form-content-overlay {
+            position: relative;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white overlay */
+            padding: 1.5rem; /* Matches p-6 */
+            border-radius: 0.75rem; /* Matches rounded-xl */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Matches shadow-2xl */
+        }
+        .input-style {
+            @apply w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] transition duration-150;
+        }
+        .section-header {
+            @apply text-xl font-bold text-[var(--secondary-color)] mb-4 pt-4 pb-2 border-b-2 border-[var(--primary-color)] mt-8;
+        }
+        .submit-btn {
+            @apply w-full py-3 bg-[var(--whatsapp-color)] text-white font-semibold rounded-xl shadow-lg hover:bg-green-700 transition duration-200 ease-in-out flex items-center justify-center;
+        }
+        .bilingual-label {
+            @apply block text-sm font-medium text-gray-700 mb-1;
+        }
+        .ar-rtl {
+            text-align: right;
+            direction: rtl;
+        }
+        .ar-rtl .input-style, .ar-rtl textarea {
+            text-align: right; 
+        }
+        .bilingual-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="form-container mx-auto rounded-xl">
+        <div class="form-content-overlay p-6 md:p-10">
+            <header class="text-center mb-8">
+                <!-- 
+                ========================================================================================
+                2. HEADER LOGO INSTRUCTION: 
+                *** ACTION REQUIRED *** Replace the 'src' URL below with the direct public link to your actual logo image.
+                ========================================================================================
+                -->
+                <img src="https://i.imgur.com/M0xA1Y8.png" 
+                    alt="City Smile Dental Clinic Logo" 
+                    class="mx-auto h-24 mb-4 object-contain">
+                
+                <h1 class="text-3xl md:text-4xl font-extrabold text-[var(--secondary-color)]">
+                    City Smile Dental Clinic
+                </h1>
+                <h2 class="ar-rtl text-3xl md:text-4xl font-extrabold text-[var(--secondary-color)]">
+                    عيادة سيتي سمايل لطب الأسنان
+                </h2>
+                <p class="text-gray-500 mt-2">
+                    Patient History Form / استبيان التاريخ الطبي للمريض
+                </p>
+            </header>
+
+            <!-- Loading/Processing Message -->
+            <div id="loading-indicator" class="hidden text-center py-4 text-[var(--secondary-color)] font-medium">
+                Formatting data... Please wait for WhatsApp to open. / يرجى الانتظار حتى يفتح الواتساب.
+            </div>
+
+            <form id="dental-history-form">
+
+                <!-- 1. Patient Information -->
+                <div class="bilingual-header section-header">
+                    <span>1. Patient Information</span>
+                    <span class="ar-rtl">1. البيانات الشخصية</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Full Name -->
+                    <div>
+                        <label for="full_name" class="bilingual-label">Full Name / <span dir="rtl">الاسم الكامل</span></label>
+                        <input type="text" id="full_name" name="full_name" required class="input-style">
+                    </div>
+                    <!-- Date of Birth -->
+                    <div>
+                        <label for="dob" class="bilingual-label">Date of Birth / <span dir="rtl">تاريخ الميلاد</span></label>
+                        <input type="date" id="dob" name="dob" required class="input-style">
+                    </div>
+                    <!-- Phone Number -->
+                    <div>
+                        <label for="phone" class="bilingual-label">Phone Number / <span dir="rtl">رقم الهاتف</span></label>
+                        <input type="tel" id="phone" name="phone" required class="input-style" placeholder="+971 50 123 4567">
+                    </div>
+                    <!-- Email Address -->
+                    <div>
+                        <label for="email" class="bilingual-label">Email Address / <span dir="rtl">البريد الإلكتروني</span></label>
+                        <input type="email" id="email" name="email" required class="input-style">
+                    </div>
+                    <!-- Address -->
+                    <div class="md:col-span-2">
+                        <label for="address" class="bilingual-label">Address / <span dir="rtl">العنوان</span></label>
+                        <input type="text" id="address" name="address" class="input-style" placeholder="Street Address, City, Country / اسم الشارع، المدينة، الدولة">
+                    </div>
+                    <!-- Emergency Contact Name -->
+                    <div>
+                        <label for="emergency_contact" class="bilingual-label">Emergency Contact Name / <span dir="rtl">اسم جهة الاتصال في حالة الطوارئ</span></label>
+                        <input type="text" id="emergency_contact" name="emergency_contact" class="input-style">
+                    </div>
+                    <!-- Emergency Contact Phone -->
+                    <div>
+                        <label for="emergency_phone" class="bilingual-label">Emergency Contact Phone / <span dir="rtl">رقم هاتف الطوارئ</span></label>
+                        <input type="tel" id="emergency_phone" name="emergency_phone" class="input-style">
+                    </div>
+                </div>
+
+                <!-- 2. General Health History -->
+                <div class="bilingual-header section-header">
+                    <span>2. General Health History</span>
+                    <span class="ar-rtl">2. التاريخ الصحي العام</span>
+                </div>
+                <div class="space-y-6">
+
+                    <!-- Allergies -->
+                    <div>
+                        <label class="bilingual-label mb-2">Do you have any allergies? / <span dir="rtl">هل لديك أي نوع من الحساسية؟</span></label>
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="allergies_yn" value="Yes" class="form-radio h-4 w-4 text-[var(--primary-color)]" onclick="document.getElementById('allergies_details').classList.remove('hidden')">
+                                <span class="ml-2">Yes / <span dir="rtl">نعم</span></span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="allergies_yn" value="No" checked class="form-radio h-4 w-4 text-[var(--primary-color)]" onclick="document.getElementById('allergies_details').classList.add('hidden')">
+                                <span class="ml-2">No / <span dir="rtl">لا</span></span>
+                            </label>
+                        </div>
+                        <textarea id="allergies_details" name="allergies_details" placeholder="Please list known allergies (medications, latex, etc.) / يرجى سرد أنواع الحساسية المعروفة (أدوية، لاتكس، إلخ)" class="input-style mt-3 hidden"></textarea>
+                    </div>
+
+                    <!-- Medications -->
+                    <div>
+                        <label for="medications" class="bilingual-label">Are you currently taking any medication? (List all current medications) / <span dir="rtl">هل تتناول أي أدوية حالياً؟ (يرجى سرد جميع الأدوية الحالية)</span></label>
+                        <textarea id="medications" name="medications" rows="3" class="input-style" placeholder="Example: Lisinopril 5mg, Aspirin, Multivitamin / مثال: ليستروبيل ٥ ملغ، أسبرين، فيتامينات"></textarea>
+                    </div>
+
+                    <!-- Medical Conditions -->
+                    <div>
+                        <label class="bilingual-label mb-3">Do you have any medical condition? (Check all that apply) / <span dir="rtl">هل تعاني من أي حالة طبية؟ (يرجى تحديد ما ينطبق)</span></label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="conditions" value="High Blood Pressure" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">High Blood Pressure / <span dir="rtl">ضغط الدم المرتفع</span></span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="conditions" value="Diabetes" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Diabetes / <span dir="rtl">السكري</span></span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="conditions" value="Heart Condition" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Heart Condition / <span dir="rtl">أمراض القلب</span></span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="conditions" value="Asthma" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Asthma / <span dir="rtl">الربو</span></span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="conditions" value="Epilepsy/Seizures" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Epilepsy/Seizures / <span dir="rtl">الصرع/التشنجات</span></span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="conditions" value="Other Chronic Condition" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Other Chronic Condition / <span dir="rtl">حالة مزمنة أخرى</span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Surgeries/Hospitalization -->
+                    <div>
+                        <label class="bilingual-label mb-2">Have you had any surgeries or hospitalization? / <span dir="rtl">هل أجريت أي عمليات جراحية أو إقامة في المستشفى؟</span></label>
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="surgeries_yn" value="Yes" class="form-radio h-4 w-4 text-[var(--primary-color)]" onclick="document.getElementById('surgeries_details').classList.remove('hidden')">
+                                <span class="ml-2">Yes / <span dir="rtl">نعم</span></span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="surgeries_yn" value="No" checked class="form-radio h-4 w-4 text-[var(--primary-color)]" onclick="document.getElementById('surgeries_details').classList.add('hidden')">
+                                <span class="ml-2">No / <span dir="rtl">لا</span></span>
+                            </label>
+                        </div>
+                        <textarea id="surgeries_details" name="surgeries_details" placeholder="Please list dates and reasons for surgeries or hospitalization / يرجى ذكر التواريخ والأسباب" class="input-style mt-3 hidden"></textarea>
+                    </div>
+                    
+                    <!-- Smoking/Tobacco -->
+                    <div>
+                        <label class="bilingual-label mb-2">Do you smoke or use tobacco products? / <span dir="rtl">هل تدخن أو تستخدم منتجات التبغ؟</span></label>
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="smoking_yn" value="Yes" class="form-radio h-4 w-4 text-[var(--primary-color)]" onclick="document.getElementById('smoking_frequency').classList.remove('hidden')">
+                                <span class="ml-2">Yes / <span dir="rtl">نعم</span></span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="smoking_yn" value="No" checked class="form-radio h-4 w-4 text-[var(--primary-color)]" onclick="document.getElementById('smoking_frequency').classList.add('hidden')">
+                                <span class="ml-2">No / <span dir="rtl">لا</span></span>
+                            </label>
+                        </div>
+                        <input type="text" id="smoking_frequency" name="smoking_frequency" placeholder="If yes, how often? (e.g., 1 pack/day) / إذا كانت الإجابة نعم، فكم مرة؟" class="input-style mt-3 hidden">
+                    </div>
+
+                    <!-- Pregnancy (Female only) -->
+                    <div>
+                        <label class="bilingual-label mb-2">Are you pregnant or planning to become pregnant? / <span dir="rtl">هل أنت حامل أو تخططين للحمل؟</span></label>
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="pregnancy_yn" value="Yes" class="form-radio h-4 w-4 text-[var(--primary-color)]">
+                                <span class="ml-2">Yes / <span dir="rtl">نعم</span></span>
+                            </label>
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="pregnancy_yn" value="No" checked class="form-radio h-4 w-4 text-[var(--primary-color)]">
+                                <span class="ml-2">No / <span dir="rtl">لا</span></span>
+                            </label>
+                        </div>
+                        <label class="flex items-center mt-3">
+                            <input type="checkbox" name="conditions" value="Nursing" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                            <span class="ml-2 text-sm text-gray-600">I am currently nursing / <span dir="rtl">أنا مرضعة حالياً</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 3. Dental History and Concerns -->
+                <div class="bilingual-header section-header">
+                    <span>3. Dental History and Concerns</span>
+                    <span class="ar-rtl">3. التاريخ السني والمخاوف</span>
+                </div>
+                <div class="space-y-6">
+                    
+                    <!-- Reason for Appointment -->
+                    <div>
+                        <label class="bilingual-label mb-2">Reason for Today's Appointment / <span dir="rtl">سبب موعد اليوم:</span></label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="appointment_reason" value="Routine Checkup" class="form-radio h-4 w-4 text-[var(--primary-color)]" required>
+                                <span class="ml-2 text-sm text-gray-600">Routine Checkup / <span dir="rtl">مراجعة دورية</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="appointment_reason" value="Cleaning" class="form-radio h-4 w-4 text-[var(--primary-color)]">
+                                <span class="ml-2 text-sm text-gray-600">Cleaning / <span dir="rtl">تنظيف الأسنان</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="appointment_reason" value="Tooth Pain" class="form-radio h-4 w-4 text-[var(--primary-color)]">
+                                <span class="ml-2 text-sm text-gray-600">Tooth Pain / <span dir="rtl">ألم في الأسنان</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="radio" name="appointment_reason" value="Other" class="form-radio h-4 w-4 text-[var(--primary-color)]">
+                                <span class="ml-2 text-sm text-gray-600">Other / <span dir="rtl">أخرى</span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="visit_reason" class="bilingual-label">Details (Describe the main reason for your visit) / <span dir="rtl">التفاصيل (صف السبب الرئيسي لزيارتك)</span></label>
+                        <textarea id="visit_reason" name="visit_reason" rows="2" required class="input-style" placeholder="e.g., Routine checkup, specific tooth pain location / مثال: فحص روتيني، موقع محدد لألم الأسنان"></textarea>
+                    </div>
+
+                    <!-- Last Dental Visit -->
+                    <div>
+                        <label for="last_dental_visit" class="bilingual-label">Date of Last Dental Visit / <span dir="rtl">تاريخ آخر زيارة للأسنان</span></label>
+                        <input type="date" id="last_dental_visit" name="last_dental_visit" class="input-style">
+                    </div>
+                    
+                    <!-- A. Current Dental Problems / Concerns -->
+                    <div class="mt-8 pt-4 border-t border-gray-200">
+                        <label class="block text-base font-semibold text-[var(--secondary-color)] mb-3">A. Current Dental Problems / <span dir="rtl">أ. المشاكل السنية الحالية</span>:</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="current_concerns" value="Tooth Pain" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Tooth Pain / <span dir="rtl">ألم في الأسنان</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="current_concerns" value="Gums Bleeding" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Gums Bleeding / <span dir="rtl">نزيف اللثة</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="current_concerns" value="Sensitivity (Hot/Cold)" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Sensitivity (Hot/Cold) / <span dir="rtl">حساسية (الحار/البارد)</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="current_concerns" value="Swelling" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Swelling / <span dir="rtl">ورم</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="current_concerns" value="Other Dental Concern" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Other / <span dir="rtl">أخرى</span></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- B. Previous Dental Treatments -->
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <label class="block text-base font-semibold text-[var(--secondary-color)] mb-3">B. Previous Dental Treatments / <span dir="rtl">ب. العلاجات السنية السابقة</span>:</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="past_treatments" value="Fillings/Restorations" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Fillings / <span dir="rtl">حشوات تجميلية</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="past_treatments" value="Root Canal Treatment" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Root Canal / <span dir="rtl">علاج العصب</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="past_treatments" value="Extraction (Tooth Removal)" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Extraction / <span dir="rtl">خلع</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="past_treatments" value="Braces/Orthodontics" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Braces / <span dir="rtl">تقويم</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="past_treatments" value="Implants" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Implants / <span dir="rtl">زراعة</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="past_treatments" value="Dental Crowns/Bridges" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Crowns/Bridges / <span dir="rtl">تيجان وجسور</span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- C. Current Dental Symptoms/Experiences -->
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <label class="block text-base font-semibold text-[var(--secondary-color)] mb-3">C. Current Dental Symptoms / <span dir="rtl">ج. الأعراض السنية الحالية</span>:</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="dental_symptoms" value="Teeth Grinding (Bruxism)" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Teeth Grinding / <span dir="rtl">صرير الأسنان</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="dental_symptoms" value="Jaw Pain (TMJ)" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Jaw Pain / <span dir="rtl">ألم الفك</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="dental_symptoms" value="Frequent Headaches" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Frequent Headaches / <span dir="rtl">صداع متكرر</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="dental_symptoms" value="Bad Breath" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Bad Breath / <span dir="rtl">رائحة الفم الكريهة</span></span>
+                            </label>
+                            <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                <input type="checkbox" name="dental_symptoms" value="Dry Mouth" class="h-4 w-4 text-[var(--primary-color)] border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-600">Dry Mouth / <span dir="rtl">جفاف الفم</span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Hygiene Questions -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 pt-4 border-t border-gray-200">
+                        <div>
+                            <label class="bilingual-label mb-2">Do you brush at least twice a day? / <span dir="rtl">هل تنظف أسنانك مرتين يومياً على الأقل؟</span></label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                    <input type="radio" name="brushing" value="Yes" class="form-radio h-4 w-4 text-[var(--primary-color)]" required>
+                                    <span class="ml-2">Yes / <span dir="rtl">نعم</span></span>
+                                </label>
+                                <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                    <input type="radio" name="brushing" value="No" class="form-radio h-4 w-4 text-[var(--primary-color)]">
+                                    <span class="ml-2">No / <span dir="rtl">لا</span></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="bilingual-label mb-2">Do you floss daily? / <span dir="rtl">هل تستخدم خيط الأسنان يومياً؟</span></label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                    <input type="radio" name="flossing" value="Yes" class="form-radio h-4 w-4 text-[var(--primary-color)]" required>
+                                    <span class="ml-2">Yes / <span dir="rtl">نعم</span></span>
+                                </label>
+                                <label class="flex items-center p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                                    <input type="radio" name="flossing" value="No" class="form-radio h-4 w-4 text-[var(--primary-color)]">
+                                    <span class="ml-2">No / <span dir="rtl">لا</span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Acknowledgement and Consent -->
+                <div class="bilingual-header section-header">
+                    <span>4. Acknowledgement and Consent</span>
+                    <span class="ar-rtl">4. إقرار وموافقة</span>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <label class="flex items-start">
+                        <input type="checkbox" id="acknowledgement" name="acknowledgement" value="Acknowledged" required class="h-5 w-5 mt-1 text-[var(--secondary-color)] border-gray-300 rounded focus:ring-[var(--secondary-color)]">
+                        <span class="ml-3 text-sm text-gray-800">
+                            I certify that the information provided is accurate and complete to the best of my knowledge. I understand that this information is essential for my dental care. 
+                            <span class="font-bold text-[var(--secondary-color)]">Typing my full name below acts as my digital signature.</span>
+                            <br class="mb-2">
+                            <span dir="rtl" class="block mt-1 font-semibold">
+                                أشهد أن المعلومات المقدمة دقيقة وكاملة حسب علمي. وأتفهم أن هذه المعلومات ضرورية لتلقي الرعاية السنية. 
+                                <span class="font-bold text-[var(--secondary-color)]">كتابة اسمي بالكامل أدناه يعتبر توقيعاً رقمياً مني.</span>
+                            </span>
+                        </span>
+                    </label>
+                </div>
+                
+                <!-- 5. Signature and Date -->
+                <div class="bilingual-header section-header">
+                    <span>5. Signature and Date</span>
+                    <span class="ar-rtl">5. التوقيع والتاريخ</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <!-- Signature Line -->
+                    <div>
+                        <label for="patient_signature" class="bilingual-label">Patient Signature (Type Full Name) / <span dir="rtl">توقيع المريض (اكتب الاسم بالكامل)</span></label>
+                        <input type="text" id="patient_signature" name="patient_signature" required class="input-style" placeholder="Type your full legal name / اكتب اسمك القانوني الكامل">
+                    </div>
+                    <!-- Submission Date -->
+                    <div>
+                        <label for="submission_date" class="bilingual-label">Date of Submission / <span dir="rtl">تاريخ التقديم</span></label>
+                        <input type="date" id="submission_date" name="submission_date" required class="input-style">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn mt-10">
+                    <!-- WHATSAPP LOGO PLACEHOLDER. Replace this image URL with your actual WhatsApp logo image URL. -->
+                    <img src="https://i.imgur.com/F9Yunn1.png" class="w-6 h-6 mr-3 rounded-full">
+                    
+                    Send History via WhatsApp / <span dir="rtl">إرسال التاريخ الطبي عبر واتساب</span>
+                </button>
+                <p class="text-xs text-center text-gray-500 mt-2">
+                    Note: This will open WhatsApp on your device with the form data pre-filled. You must press send to finalize.
+                    <br>
+                    <span dir="rtl" class="block mt-1">ملاحظة: سيؤدي هذا إلى فتح واتساب على جهازك مع ملء بيانات النموذج مسبقاً. يجب عليك الضغط على إرسال لإنهاء العملية.</span>
+                </p>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('dental-history-form');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        
+        // --- PRE-FILL DATE ON LOAD ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            const submissionDateInput = document.getElementById('submission_date');
+            if (submissionDateInput) {
+                submissionDateInput.value = today;
+            }
+        });
+        
+        // *******************************************************************
+        // !!! W.I DENTAL CLINICS WHATSAPP NUMBER !!!
+        // This is the number where the form data will be sent.
+        const WHATSAPP_NUMBER = '971543482080'; 
+        // *******************************************************************
+
+        // Helper function to format array data (checkbox groups)
+        function formatCheckboxData(data, fieldName) {
+            const field = data[fieldName];
+            if (Array.isArray(field)) {
+                return field.join(' | ');
+            }
+            return field || 'None selected / لا يوجد خيار محدد';
+        }
+
+        function formatDataForWhatsApp(data) {
+            // Use WhatsApp-friendly Markdown for formatting
+            let message = "📝 *New Patient Dental History Submission (W.I Dental Clinics)*\n\n";
+            message += "---------------------------------------\n";
+            
+            // 1. Patient Information
+            message += "*1. Patient Information (البيانات الشخصية)*\n";
+            message += `Full Name (الاسم): ${data.full_name || 'N/A'}\n`;
+            message += `DOB (تاريخ الميلاد): ${data.dob || 'N/A'}\n`;
+            message += `Phone (هاتف): ${data.phone || 'N/A'}\n`;
+            message += `Email (البريد): ${data.email || 'N/A'}\n`;
+            message += `Address (العنوان): ${data.address || 'N/A'}\n`;
+            message += `Emergency Contact (الطوارئ): ${data.emergency_contact || 'N/A'} (Tel: ${data.emergency_phone || 'N/A'})\n`;
+            
+            message += "---------------------------------------\n";
+
+            // 2. General Health History
+            message += "*2. General Health History (التاريخ الصحي العام)*\n";
+            
+            const allergies = data.allergies_yn === 'Yes' ? data.allergies_details : 'No / لا';
+            message += `Allergies (حساسية): ${allergies || 'N/A'}\n`;
+            
+            message += `Medications (أدوية): ${data.medications || 'None / لا يوجد'}\n`;
+
+            const medicalConditions = formatCheckboxData(data, 'conditions');
+            message += `Medical Conditions (الحالات الطبية): ${medicalConditions}\n`;
+            
+            const surgeries = data.surgeries_yn === 'Yes' ? data.surgeries_details : 'No / لا';
+            message += `Surgeries/Hospitalization (جراحات/مستشفى): ${surgeries || 'N/A'}\n`;
+
+            const smokingStatus = data.smoking_yn === 'Yes' ? `Yes, Frequency (نعم، التكرار): ${data.smoking_frequency || 'Not specified'}` : 'No / لا';
+            message += `Smoking/Tobacco Use (التدخين): ${smokingStatus}\n`;
+
+            message += `Pregnancy Status (حالة الحمل): ${data.pregnancy_yn || 'N/A'}\n`;
+            
+            message += "---------------------------------------\n";
+
+            // 3. Dental History and Concerns
+            message += "*3. Dental History (التاريخ السني)*\n";
+            
+            message += `Appointment Reason (سبب الموعد): ${data.appointment_reason || 'N/A'}\n`;
+            message += `Reason Details (التفاصيل): ${data.visit_reason || 'N/A'}\n`;
+            
+            message += `Last Dental Visit (آخر زيارة): ${data.last_dental_visit || 'N/A'}\n`;
+            
+            const concerns = formatCheckboxData(data, 'current_concerns');
+            message += `\n*A. Current Concerns (المشاكل الحالية):* ${concerns}\n`;
+            
+            const treatments = formatCheckboxData(data, 'past_treatments');
+            message += `*B. Past Treatments (العلاجات السابقة):* ${treatments}\n`;
+            
+            const symptoms = formatCheckboxData(data, 'dental_symptoms');
+            message += `*C. Symptoms/Experiences (الأعراض):* ${symptoms}\n`;
+            
+            message += `\nBrushing Twice/Day (تنظيف مرتين): ${data.brushing || 'N/A'}\n`;
+            message += `Flossing Daily (خيط الأسنان يومياً): ${data.flossing || 'N/A'}\n`;
+
+            message += "---------------------------------------\n";
+
+            // 4 & 5. Acknowledgement and Signature
+            message += "*4. Acknowledgement & 5. Signature (إقرار وتوقيع)*\n";
+            message += `Consent (الموافقة): ${data.acknowledgement ? 'Yes' : 'No'}\n`;
+            message += `Patient Signature (توقيع المريض): *${data.patient_signature || 'MISSING'}*\n`;
+            message += `Submission Date (تاريخ التقديم): ${data.submission_date || 'MISSING'}\n`;
+
+            message += "---------------------------------------\n";
+            message += "Form submitted by patient via web link. Please confirm appointment. / تم تقديم النموذج من قبل المريض عبر الرابط. يرجى تأكيد الموعد.";
+
+            // URL-encode the message so it passes correctly in the URL
+            return encodeURIComponent(message);
+        }
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Stop default form submission
+
+            loadingIndicator.classList.remove('hidden');
+
+            // --- 1. GATHER DATA ---
+            const formData = new FormData(form);
+            const historyData = {};
+
+            // Collect all key/value pairs, handling multiple values for checkboxes
+            formData.forEach((value, key) => {
+                // Special handling for the required checkbox: it returns 'on' if checked.
+                if (key === 'acknowledgement') {
+                    // Checkbox is required, so we rely on the browser validation for presence.
+                    historyData[key] = value === 'Acknowledged'; 
+                    return; 
+                }
+
+                if (historyData[key]) {
+                    if (Array.isArray(historyData[key])) {
+                        historyData[key].push(value);
+                    } else {
+                        historyData[key] = [historyData[key], value];
+                    }
+                } else {
+                    historyData[key] = value;
+                }
+            });
+            
+            // --- 2. FORMAT AND SUBMIT VIA WHATSAPP ---
+            const encodedMessage = formatDataForWhatsApp(historyData);
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            
+            // Open the WhatsApp URL in a new tab/window
+            window.open(whatsappUrl, '_blank');
+
+            // --- 3. SHOW COMPLETION MESSAGE (Optional: Reset form) ---
+            
+            // Wait 1 second before resetting the form and hiding indicator
+            setTimeout(() => {
+                loadingIndicator.classList.add('hidden');
+                form.reset(); 
+                // Re-set the date after reset
+                const today = new Date().toISOString().split('T')[0];
+                const submissionDateInput = document.getElementById('submission_date');
+                if (submissionDateInput) {
+                    submissionDateInput.value = today;
+                }
+            }, 1000); 
+
+            console.log("WhatsApp chat initiated. Patient must press 'Send' to finalize.");
+        });
+    </script>
+</body>
+</html>
+
